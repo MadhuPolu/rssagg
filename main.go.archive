@@ -1,0 +1,31 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv/autoload"
+)
+
+func main() {
+	fmt.Println("Hello World!")
+	portString := os.Getenv("PORT")
+	if portString == "" {
+		log.Fatal("Port is not found in the environment")
+	}
+	fmt.Println("Port:", portString)
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	portString2 := os.Getenv("PORT2")
+	fmt.Println("Port:", portString2)
+
+	myEnv, err := godotenv.Read()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	fmt.Println("myEnv['Port']:", myEnv["PORT"])
+}
